@@ -1,0 +1,8 @@
+<p>My name : {{myName}}</p>
+
+
+
+<br/>
+<!-- <button (click)="addToMyArrray()">Add number</button> -->
+
+<app-my-card (CardClick)="onCardClick($event)" *ngFor="let number of myArray" [value]="number"></app-my-card>
