@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
+import { ComponentsModule } from './../components/components.module';
 import { CommonModule } from '@angular/common';
-import { ListPageComponent } from '../list-page/list-page.component';
+import { ListPageComponent } from '../pages/list-page/list-page.component';
 
 
 
@@ -8,8 +9,12 @@ import { ListPageComponent } from '../list-page/list-page.component';
   declarations: [
     ListPageComponent
   ],
+  exports:[
+    ListPageComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    ComponentsModule
   ]
 })
 export class PagesModule { }
