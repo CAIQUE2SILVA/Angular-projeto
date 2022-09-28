@@ -1,4 +1,7 @@
+import { TodoListService } from './../../services';
+import { TodoItem } from './../../interfaces/todo-item.interface';
 import { Component, OnInit } from '@angular/core';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-list-page',
@@ -7,22 +10,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListPageComponent implements OnInit {
 
-  public myArray = [1 ,2 ,3 ,4]
-  public myName = 'Caique'
+  public myArray: TodoItem[]= []
+  public myName : string = 'Caique'
 
-  constructor() { }
+  constructor(private TodoListService: TodoListService) { }
 
   ngOnInit(): void {
+    // logica para buscar os todo items
+    // this.myArray = this.TodoListService.getItems()
+
+    this.TodoListService.getItemsASync().subscribe(responce => {
+      this.myArray = responce
+    })
+
   }
 
 
   addToMyArrray() {
-    this.myArray.push(5)
+    // this.myArray.push(5)
   }
 
-  onCardClick(value: number){
-    console.log('click', value)
+  onCardClick(item: TodoItem){
+    // this.TodoListService.deleteItem(item.id)
+
+    this.TodoListService
+    .deleteItemAsync(item)
+    .pipe(
+      switchMap(() => this.TodoListService.getItemsASync())
+    )
+    .subscribe(response => this.myArray = response)
 
   }
+
+  // soma(value1: number, value2: number): void {
+  //   const numb : number = 1 ;
+  //   const string : string = "String";
+  //   const bool: boolean = true;
+  //   const unknown: unknown = ''
+  // }
 
 }

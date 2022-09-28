@@ -1,4 +1,7 @@
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TodoItem } from 'src/app/interfaces';
+
 
 @Component({
   selector: 'app-my-card',
@@ -8,12 +11,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class MyCardComponent implements OnInit {
 
 
-  @Output() CardClick: EventEmitter<number>
+  @Output() CardClick: EventEmitter<TodoItem>
 
-  @Input() value: number = 0
+  @Input() value: TodoItem = {id: 0, message: ''}
 
   constructor() {
-    this.CardClick = new EventEmitter<number>()
+    this.CardClick = new EventEmitter<TodoItem>()
   }
 
   ngOnInit(): void {
