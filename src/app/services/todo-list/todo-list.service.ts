@@ -29,9 +29,9 @@ export class TodoListService {
     return this.httpClient.get<TodoItem[]>(url)
   }
 
-  public getItems(): TodoItem[] {
-    return this.myList
-  }
+  // public getItems(): TodoItem[] {
+  //   return this.myList
+  // }
 
   public deleteItemAsync(item: TodoItem): Observable<any> {
     const url = `${this.rootUrl}/items/${item.id}`
@@ -40,10 +40,17 @@ export class TodoListService {
   }
 
 
-  public deleteItem(id:number):TodoItem[]{
-    const index = this.myList.findIndex(el => el .id === id)
+  // public deleteItem(id:number):TodoItem[]{
+  //   const index = this.myList.findIndex(el => el .id === id)
 
-    this.myList.splice(index,1)
-    return this.myList
+  //   this.myList.splice(index,1)
+  //   return this.myList
+  //}
+
+
+  public postItemAsync(item: TodoItem) : Observable<any>{
+
+    const url = $
+
   }
 }

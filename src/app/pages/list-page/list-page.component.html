@@ -5,4 +5,10 @@
 <br/>
 <!-- <button (click)="addToMyArrray()">Add number</button> -->
 
+
+<!--cards-->
 <app-my-card (CardClick)="onCardClick($event)" *ngFor="let number of myArray" [value]="number"></app-my-card>
+
+<br>
+<!--New Card button-->
+<button (click)="onCreateNewTodo()">Cadastar uma nova tarefa </button>

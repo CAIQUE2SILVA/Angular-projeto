@@ -2,6 +2,7 @@ import { TodoListService } from './../../services';
 import { TodoItem } from './../../interfaces/todo-item.interface';
 import { Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-page',
@@ -13,7 +14,8 @@ export class ListPageComponent implements OnInit {
   public myArray: TodoItem[]= []
   public myName : string = 'Caique'
 
-  constructor(private TodoListService: TodoListService) { }
+  constructor(private TodoListService: TodoListService ,
+    private router: Router) { }
 
   ngOnInit(): void {
     // logica para buscar os todo items
@@ -22,6 +24,12 @@ export class ListPageComponent implements OnInit {
     this.TodoListService.getItemsASync().subscribe(responce => {
       this.myArray = responce
     })
+
+  }
+
+  //Cria nova tarefa
+  onCreateNewTodo():void{
+   this.router.navigateByUrl('/my-form')
 
   }
 

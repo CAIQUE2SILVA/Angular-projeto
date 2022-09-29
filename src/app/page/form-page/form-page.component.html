@@ -1,0 +1,31 @@
+<p>form-page works!</p>
+
+
+
+
+<button (click)="onReturn()">Voltar</button>
+
+
+<br/>
+<br/>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <label for=""> ID:</label>
+  <input formControlName="id"> <br />
+
+  <span class="erromassege" *ngIf="getErrors('id','required')">Id e Obrigatorio</span> <br/>
+  <span class="erromassege" *ngIf="getErrors('id','pattern')">Id precisa ser apenar numeros </span> <br/>
+
+  <label>Mensagem</label>
+  <input formControlName="message"> <br />
+  <span class="erromassege" *ngIf="getErrors('message','required')">O campo de menssagem e Obrigatorio</span> <br/>
+  <span class="erromassege" *ngIf="getErrors('message','minLength')">O minimo de caracteres e 10 </span> <br/>
+  <span class="erromassege" *ngIf="getErrors('message','maxLength')">O maxmo de caracters e 300</span> <br/>
+
+
+<br />
+  <button type="submit">Enviar</button>
+</form>
+
+
+<br/>
+<button (click)="onChandId(4)">Muda o id para 4 </button>
