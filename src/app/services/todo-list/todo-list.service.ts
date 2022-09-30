@@ -1,56 +1,37 @@
-
-import { TodoItem } from 'src/app/interfaces';
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TodoItem } from 'src/app/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoListService {
+  private readonly rootUrl: string = 'http://localhost:3000'
 
-  private myList : TodoItem[] = [
+  constructor(private httpClient: HttpClient) { }
 
 
+  public getItemsAsync(): Observable<TodoItem[]> {
+    // endereço de onde buscar a informação
+    const url = `${this.rootUrl}/items`;
 
-  ]
-
-   private rootUrl: string = 'http://localhost:3000'
-
-  constructor(private httpClient : HttpClient) { }
-
-  public getItemsASync(): Observable <TodoItem[]> {
-    // endereço de  onde buscar
-    const url = `${this.rootUrl}/items`
-
-    //utlizando o http para cirar
-    // a instruçao de como buscar a informaçao
-    // devolvendo essa instruçao para quem estiver consumindo o service
+    // utilizando o http client para criar
+    // a instrução de como buscar a informação
+    // devolvendo essa instrução para quem
+    // estiver consumindo o service.
     return this.httpClient.get<TodoItem[]>(url)
   }
 
-  // public getItems(): TodoItem[] {
-  //   return this.myList
-  // }
-
-  public deleteItemAsync(item: TodoItem): Observable<any> {
+  public deleteItemAsync(item: TodoItem): Observable<{}> {
     const url = `${this.rootUrl}/items/${item.id}`
 
     return this.httpClient.delete(url)
   }
 
+  public postItemAsync(item: TodoItem): Observable<TodoItem> {
+    const url = `${this.rootUrl}/items`
 
-  // public deleteItem(id:number):TodoItem[]{
-  //   const index = this.myList.findIndex(el => el .id === id)
-
-  //   this.myList.splice(index,1)
-  //   return this.myList
-  //}
-
-
-  public postItemAsync(item: TodoItem) : Observable<any>{
-
-    const url = $
-
+    return this.httpClient.post<TodoItem>(url, item)
   }
 }

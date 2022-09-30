@@ -1,6 +1,11 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { TodoItem } from 'src/app/interfaces';
+import { TodoListService } from 'src/app/services';
+import { validateId } from 'src/app/validators';
+import { validateNumber } from 'src/app/validators/validate-number.validator';
+
 
 @Component({
   selector: 'app-form-page',
@@ -9,69 +14,67 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormPageComponent implements OnInit {
 
-  public myForm: FormGroup ;
+  public myForm: FormGroup;
 
-  constructor(private router:Router, private formBuilder:FormBuilder) {
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private todoListService: TodoListService) {
     this.myForm = this.formBuilder.group({
       id: [null, Validators.compose(
         [
           Validators.required,
-          Validators.pattern(/^[0-9]\d*$/)
-        ])],
-      message: ['',Validators.compose([
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(300)
-
-
-      ])]
+          // Validators.pattern(/^[0-9]\d*$/)
+          validateNumber()
+        ]), validateId(this.todoListService)],
+      message: ['', Validators.compose(
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(30)
+        ])]
     })
   }
 
   ngOnInit(): void {
   }
 
-public onSubmit():void{
-  console.log('coletado')
-
-
-  const isValid = this.myForm.valid
-  // console.log('formStatus esta:', formStatus)
-
-  if(!isValid){
-    return
+  public onReturn(): void {
+    this.router.navigateByUrl('/')
   }
 
-  console.log()
-}
+  public onChangeId(id: number): void {
+    const controller = this.myForm.get('id')
 
+    controller?.setValue(id)
+  }
 
-public onReturn():void{
-  this.router.navigateByUrl('/')
-}
+  public getErrors(controlName: string, errorName: string): boolean {
+    const controller = this.myForm.get(controlName)
 
+    const error = controller?.getError(errorName)
+    const touched = controller?.touched
 
-public onChandId(id:number):void{
-  const controller = this.myForm.get('id')
+    return error && touched ? true : false
+  }
 
-  controller?.setValue(id)
+  public onSubmit(): void {
+    const isValid = this.myForm.valid
 
-}
+    if (!isValid) {
+      return
+    }
 
-public getErrors(controlName:string, errorName : string): boolean{
+    const idController = this.myForm.get('id')
+    const id: number = idController?.value
 
-  const controler = this.myForm.get(controlName)
+    const messageController = this.myForm.get('message')
+    const message: string = messageController?.value
 
-  const error = controler?.getError(errorName)
+    const newTodoItem: TodoItem = new TodoItem(id, message)
 
-  const touched  = controler?.touched
-
-  const pristine = controler?.pristine
-
-  return error && touched && !pristine  ? true : false
-
-}
-
-
-
+    this.todoListService
+      .postItemAsync(newTodoItem)
+      .subscribe(() => this.onReturn())
+  }
 }

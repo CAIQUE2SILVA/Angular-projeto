@@ -15,11 +15,18 @@
   <span class="erromassege" *ngIf="getErrors('id','required')">Id e Obrigatorio</span> <br/>
   <span class="erromassege" *ngIf="getErrors('id','pattern')">Id precisa ser apenar numeros </span> <br/>
 
+  <!--validardor de ID existente-->
+    <span class="erromassege" *ngIf="getErrors('id','invalidId')">Esse ID Ja existe</span> <br/>
+  <!--validardor de ID existente-->
+    <span class="erromassege" *ngIf="getErrors('id','isNotNumber')">Id pode ser somente numeros</span> <br/>
+
+
   <label>Mensagem</label>
   <input formControlName="message"> <br />
   <span class="erromassege" *ngIf="getErrors('message','required')">O campo de menssagem e Obrigatorio</span> <br/>
   <span class="erromassege" *ngIf="getErrors('message','minLength')">O minimo de caracteres e 10 </span> <br/>
   <span class="erromassege" *ngIf="getErrors('message','maxLength')">O maxmo de caracters e 300</span> <br/>
+
 
 
 <br />
@@ -28,4 +35,4 @@
 
 
 <br/>
-<button (click)="onChandId(4)">Muda o id para 4 </button>
+<!-- <button (click)="onChandId(4)">Muda o id para 4 </button> -->

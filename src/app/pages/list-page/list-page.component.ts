@@ -21,7 +21,7 @@ export class ListPageComponent implements OnInit {
     // logica para buscar os todo items
     // this.myArray = this.TodoListService.getItems()
 
-    this.TodoListService.getItemsASync().subscribe(responce => {
+    this.TodoListService.getItemsAsync().subscribe(responce => {
       this.myArray = responce
     })
 
@@ -44,7 +44,7 @@ export class ListPageComponent implements OnInit {
     this.TodoListService
     .deleteItemAsync(item)
     .pipe(
-      switchMap(() => this.TodoListService.getItemsASync())
+      switchMap(() => this.TodoListService.getItemsAsync())
     )
     .subscribe(response => this.myArray = response)
 
