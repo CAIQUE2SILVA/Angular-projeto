@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { TodoItem } from 'src/app/interfaces';
@@ -10,7 +10,8 @@ import { validateNumber } from 'src/app/validators/validate-number.validator';
 @Component({
   selector: 'app-form-page',
   templateUrl: './form-page.component.html',
-  styleUrls: ['./form-page.component.scss']
+  styleUrls: ['./form-page.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.Default
 })
 export class FormPageComponent implements OnInit {
 

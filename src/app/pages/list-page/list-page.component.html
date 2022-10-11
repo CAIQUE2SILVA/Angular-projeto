@@ -7,8 +7,52 @@
 
 
 <!--cards-->
-<app-my-card (CardClick)="onCardClick($event)" *ngFor="let number of myArray" [value]="number"></app-my-card>
+
+
+<ng-container *ngIf="showItems ; else spiner" >
+
+  <app-my-card (CardClick)="onCardClick($event)" *ngFor="let number of myArray" [value]="number"></app-my-card>
+</ng-container>
+
+
+<ng-template #spiner>
+  <span>
+    imagina um spinner
+  </span>
+</ng-template>
 
 <br>
 <!--New Card button-->
 <button (click)="onCreateNewTodo()">Cadastar uma nova tarefa </button>
+
+
+<!--
+ Exemplo de ngSwitch
+-->
+
+<!-- <ng-container [ngSwitch]="switchCondition"> -->
+
+  <!-- <p *ngSwitchCase="1" >Condition e um </p>
+  <p *ngSwitchCase="2" >Condition e dois </p>
+  <p *ngSwitchCase="3" >Condition e tres </p>
+  <p *ngSwitchDefault="default">condition default</p>
+</ng-container>
+<br />
+<button (click)="onaddCondition()">Somar condition </button> -->
+
+<!-- Exemplo de NgClass -->
+
+<!--
+<div [ngClass]="{'blue' : isBlue , 'red' : isRed}">
+  nossa div
+</div>
+<button (click)="onToggleBlue()">Toglle Blue</button>
+<button (click)="onToggleRed()">Toglle Red</button> -->
+
+
+<p appHover="pink" style="background-color: blue;">
+  elemento de texto qualquer
+</p>
+<p appHover="red">
+  elemento de texto qualquer
+</p>

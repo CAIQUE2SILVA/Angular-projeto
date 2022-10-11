@@ -1,3 +1,4 @@
+import { DirectivesModule } from './../directives/directives.module';
 import { NgModule } from '@angular/core';
 import { ComponentsModule } from './../components/components.module';
 import { CommonModule } from '@angular/common';
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ComponentsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DirectivesModule
 
   ]
 })

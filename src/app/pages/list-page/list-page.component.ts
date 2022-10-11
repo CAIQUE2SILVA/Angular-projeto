@@ -14,6 +14,20 @@ export class ListPageComponent implements OnInit {
   public myArray: TodoItem[]= []
   public myName : string = 'Caique'
 
+
+//[ngClass]
+public isBlue:boolean = true;
+public isRed:boolean = false;
+
+
+//switch
+public switchCondition: number = 1 ;
+
+  public showItems: boolean = false ;
+
+  // TESTE
+  public showMessage : boolean = false;
+
   constructor(private TodoListService: TodoListService ,
     private router: Router) { }
 
@@ -23,6 +37,7 @@ export class ListPageComponent implements OnInit {
 
     this.TodoListService.getItemsAsync().subscribe(responce => {
       this.myArray = responce
+      this.showItems = true
     })
 
   }
@@ -47,7 +62,6 @@ export class ListPageComponent implements OnInit {
       switchMap(() => this.TodoListService.getItemsAsync())
     )
     .subscribe(response => this.myArray = response)
-
   }
 
   // soma(value1: number, value2: number): void {
@@ -57,4 +71,17 @@ export class ListPageComponent implements OnInit {
   //   const unknown: unknown = ''
   // }
 
+
+
+
+  onaddCondition():void{
+    this.switchCondition++
+  }
+
+  onToggleBlue() :void{
+    this.isBlue = !this.isBlue
+  }
+  onToggleRed() :void{
+    this.isRed = !this.isRed
+  }
 }
