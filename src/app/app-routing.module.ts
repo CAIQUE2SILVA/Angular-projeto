@@ -1,3 +1,4 @@
+import { PipesPageComponent } from './pages/pipes-page/pipes-page.component';
 import { FormPageComponent } from './page/form-page/form-page.component';
 import { PagesModule } from './pages/pages.module';
 import { ListPageComponent } from './pages/list-page/list-page.component';
@@ -7,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {path: 'my-list', component: ListPageComponent},
   {path: 'my-form', component: FormPageComponent},
+  {path:'pipes-examples', component: PipesPageComponent},
   { path: '**', redirectTo: 'my-list' },
 ];
 

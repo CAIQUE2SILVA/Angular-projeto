@@ -1,0 +1,28 @@
+<p> A data de hj  e {{ today | date  }}</p>
+<br/>
+<p> A data de hj  e {{ today | date:'medium' }}</p>
+<br/>
+<p> A data de hj  e {{ today | date:'shortTime' }}</p>
+<br/>
+<p> A data de hj  e {{ today | date:'dd/MM/yy hh:mm:ss' }}</p>
+<br/>
+<p> {{ lowercaseString | uppercase }}</p>
+<br/>
+<p> {{ uppercaseString | lowercase  }}</p>
+<br/>
+<p> {{ titlecaseString | titlecase  }}</p>
+
+
+
+<br/>
+<p> {{ moneyValue |currency: 'BRL'  }}</p>
+
+<br/>
+<p> {{ stream | async | uppercase}}</p>
+
+<button (click)="onAdd()">adicionar</button>
+
+<br/>
+<br/>
+
+<p> Aplicando nosso pipe : {{myPipeString | uppercase | myPipe: 'paran1' : 'param2' }} </p>

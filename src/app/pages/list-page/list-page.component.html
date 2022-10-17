@@ -14,6 +14,11 @@
   <app-my-card (CardClick)="onCardClick($event)" *ngFor="let number of myArray" [value]="number"></app-my-card>
 </ng-container>
 
+<br/>
+
+<p>
+  Existem {{itemCount$ | async}} items na lista
+</p>
 
 <ng-template #spiner>
   <span>
@@ -25,6 +30,10 @@
 <!--New Card button-->
 <button (click)="onCreateNewTodo()">Cadastar uma nova tarefa </button>
 
+
+<app-my-card (CardClick)="onCardClick($event)" *ngFor="let item of items$ |async" [value]="item"></app-my-card>
+
+<button (click)="onGetItems()">reloud items </button>
 
 <!--
  Exemplo de ngSwitch
@@ -56,3 +65,5 @@
 <p appHover="red">
   elemento de texto qualquer
 </p>
+
+<button (click)="onSeePipes()">Pipes exemplos</button>
